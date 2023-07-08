@@ -1,4 +1,5 @@
 using E_Commerce_API.Helper;
+using E_Commerce_API.MailService;
 using E_Commerce_Business.Repository;
 using E_Commerce_Business.Repository.IRepository;
 using E_Commerce_DataAccess;
@@ -23,6 +24,7 @@ builder.Services.AddScoped<IProductRepository, ProductRepository>();
 builder.Services.AddScoped<ICategoryRepository,CategoryRepository>();
 builder.Services.AddScoped<IDiscountRepository, DiscountRepository>();
 builder.Services.AddScoped<IOrderRepository, OrderRepository>();
+builder.Services.AddScoped<IMailHelper, MailHelper>();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());

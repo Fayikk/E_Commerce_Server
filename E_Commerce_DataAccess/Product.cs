@@ -16,11 +16,13 @@ namespace E_Commerce_DataAccess
         public string Description { get; set; }
         public bool ShopFavourites { get; set; }    
         public bool CustomerFavourites { get; set; }    
+        public int StockAmount { get; set; }
         public string Author { get; set; }  
         public string ImageUrl { get; set; }    
         public int CategoryId { get; set; }
         [ForeignKey("CategoryId")]
         public Category Category { get; set; }
+
         public ICollection<ProductPrice> ProductPrices { get; set; }
     }
 }

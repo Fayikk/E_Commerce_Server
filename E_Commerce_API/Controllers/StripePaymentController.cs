@@ -1,4 +1,5 @@
-﻿using E_Commerce_Models;
+﻿using E_Commerce_API.MailService;
+using E_Commerce_Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -59,10 +60,15 @@ namespace E_Commerce_API.Controllers
                 }
                 var service = new SessionService();
                 Session session = service.Create(options);
+               
                 return Ok(new SuccessResponseDTO()
                 {
                     Data = session.Id + ";" + session.PaymentIntentId
                 });
+
+
+              
+
 
             }
             catch (Exception ex)

@@ -1,4 +1,5 @@
-﻿using E_Commerce_Business.Repository.IRepository;
+﻿using E_Commerce_API.MailService;
+using E_Commerce_Business.Repository.IRepository;
 using E_Commerce_Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.HttpResults;
@@ -12,9 +13,11 @@ namespace E_Commerce_API.Controllers
     public class OrderController : ControllerBase
     {
         private readonly IOrderRepository _orderRepository;
-        public OrderController(IOrderRepository orderRepository)
+        private readonly IMailHelper _mailHelper;
+        public OrderController(IOrderRepository orderRepository,IMailHelper mailHelper)
         {
             _orderRepository = orderRepository;
+            _mailHelper = mailHelper;
         }
 
 
@@ -71,6 +74,8 @@ namespace E_Commerce_API.Controllers
                         ErrorMessage = "Can not mark payment as successfull",
                     });
                 }
+                _mailHelper.SendEmailForOrder("Siparişiniz Alındı"
+                 , $"{orderHeaderDTO.SessionId} numaralı siparişiniz alındı,bizi tercih ettiğiniz için teşekkür ederiz", orderHeaderDTO.Email);
                 return Ok(result);
             }
             return BadRequest();
